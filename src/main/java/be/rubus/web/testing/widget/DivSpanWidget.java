@@ -27,14 +27,4 @@ import be.rubus.web.testing.annotation.WidgetValidation;
 public class DivSpanWidget extends AbstractWidget {
 
 
-    @WidgetValidation
-    public boolean validateWidget() {
-        System.out.println("Validating DIV");
-        return true;
-    }
-    /*
-    public Detector getDetector() {
-        return null;
-    }
-    */
 }

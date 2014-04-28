@@ -21,10 +21,13 @@ package be.rubus.web.testing;
 import be.rubus.web.testing.annotation.Grafaces;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.fragment.Root;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 /**
@@ -56,5 +59,24 @@ public abstract class AbstractWidget extends CommonElementCode {
     protected void blur(WebElement someElement) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].blur();", someElement);
 
+    }
+
+    protected void waitUntilVisibilityOf(WebElement element) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    protected void waitUntilVisibilityOf(By byId) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(driver.findElement(byId)));
+    }
+
+
+    protected void waitUntilHiddenOf(WebElement checkElement) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.visibilityOf(checkElement)));
+
+    }
+
+    public String getAttribute(String attributeName) {
+        return root.getAttribute(attributeName);
     }
 }

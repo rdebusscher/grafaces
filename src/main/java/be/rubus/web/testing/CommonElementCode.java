@@ -50,7 +50,7 @@ public class CommonElementCode {
 
         WebElement result = null;
         WebElement parent = getParent(element);
-        List<WebElement> children = parent.findElements(By.xpath(".//*"));
+        List<WebElement> children = getAllChildren(parent);
         Iterator<WebElement> iterator = children.iterator();
         while (result == null && iterator.hasNext()) {
             WebElement child = iterator.next();
@@ -62,6 +62,10 @@ public class CommonElementCode {
         }
         return result;
 
+    }
+
+    protected List<WebElement> getAllChildren(WebElement element) {
+        return element.findElements(By.xpath("*"));
     }
 
     protected String getId(WebElement element) {
@@ -78,5 +82,13 @@ public class CommonElementCode {
 
     protected boolean containsAttribute(WebElement someElement, String attributeName) {
         return getAttribute(someElement, attributeName) != null;
+    }
+
+    public void waitForScreenUpdate(int timeInMiliis) {
+        try {
+            Thread.sleep(timeInMiliis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

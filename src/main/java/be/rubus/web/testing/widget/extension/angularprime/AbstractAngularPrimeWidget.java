@@ -19,6 +19,7 @@
 package be.rubus.web.testing.widget.extension.angularprime;
 
 import be.rubus.web.testing.AbstractWidget;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -44,5 +45,27 @@ public class AbstractAngularPrimeWidget extends AbstractWidget {
             }
         }
         return result;
+    }
+
+    protected void waitForAjax() {
+        boolean ajaxIsComplete;
+        int loopCount = 50;
+        while (loopCount > 0) {
+            ajaxIsComplete = (Boolean) ((JavascriptExecutor) driver).executeScript("return jQuery.active == 0");
+            if (ajaxIsComplete) {
+                break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
+            }
+            loopCount--;
+
+        }
+        if (loopCount == 0) {
+            throw new RuntimeException("Ajax request still running after timeout");
+        }
     }
 }

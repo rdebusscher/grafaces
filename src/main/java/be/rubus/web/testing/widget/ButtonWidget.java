@@ -40,10 +40,4 @@ public class ButtonWidget extends AbstractWidget {
         root.click();
     }
 
-    @PostConstruct
-    private void init() {
-        System.out.println("Button widget init method");
-    }
-
-
 }
