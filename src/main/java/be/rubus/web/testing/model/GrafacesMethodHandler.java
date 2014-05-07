@@ -25,5 +25,5 @@ import java.util.List;
  *
  */
 public interface GrafacesMethodHandler {
-    void executeMethods(List<Method> methods, Object target);
+    Object executeMethods(List<Method> methods, Object target);
 }

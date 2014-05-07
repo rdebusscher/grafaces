@@ -37,13 +37,14 @@ public class WidgetValidationHandler implements GrafacesMethodHandler {
     private GrafacesContext context = GrafacesContext.getInstance();
 
     @Override
-    public void executeMethods(List<Method> methods, Object target) {
+    public Object executeMethods(List<Method> methods, Object target) {
 
         for (Method method : methods) {
             if (!performValidation(method, target)) {
                 failValidation();
             }
         }
+        return Boolean.TRUE;
     }
 
     private void failValidation() {
@@ -51,7 +52,7 @@ public class WidgetValidationHandler implements GrafacesMethodHandler {
         fail("Widget validation failed");
     }
 
-    private boolean performValidation(Method method, Object target) {
+    protected boolean performValidation(Method method, Object target) {
         if (method.getReturnType() == boolean.class) {
             return (Boolean) ReflectionUtil.invokeMethod(method, target);
 

@@ -47,6 +47,17 @@ public abstract class AbstractWidget extends CommonElementCode {
     @Grafaces
     protected GrafacesContext grafacesContext;
 
+    /**
+     * You can  call this method to verify if the DOM structure complies with the widget as defined by the method(s)
+     * annotated by {@link be.rubus.web.testing.annotation.WidgetValidation}. Don't override this method.
+     * @return true when DOM element complies.
+     */
+    // Can't be final due to proxy usage.
+    public boolean isWidgetValid() {
+        // This must always be executed by the interceptor which doesn't propagate to this method.
+        throw new IllegalAccessError("This should never be called but handled by the GrafacesInterceptor");
+    }
+
     public String getContent() {
         return root.getText();
     }

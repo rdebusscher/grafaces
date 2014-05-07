@@ -19,10 +19,7 @@
 package be.rubus.web.testing;
 
 import be.rubus.web.testing.annotation.WidgetValidation;
-import be.rubus.web.testing.model.GrafacesMethodHandler;
-import be.rubus.web.testing.model.GrafacesObject;
-import be.rubus.web.testing.model.PostContructHandler;
-import be.rubus.web.testing.model.WidgetValidationHandler;
+import be.rubus.web.testing.model.*;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.enricher.ReflectionHelper;
 import org.jboss.arquillian.graphene.findby.FindByUtilities;
@@ -52,6 +49,7 @@ public class GrafacesContext {
 
     private Map<Class<?>, GrafacesObject> grafacesObjects = new HashMap<Class<?>, GrafacesObject>();
     private Map<Class<? extends Annotation>, GrafacesMethodHandler> grafacesMethodHandlers = new HashMap<Class<? extends Annotation>, GrafacesMethodHandler>();
+    private GrafacesMethodHandler widgetValidtionHandler;
 
     private GrafacesContext() {
     }
@@ -59,6 +57,7 @@ public class GrafacesContext {
     private void init() {
         grafacesMethodHandlers.put(PostConstruct.class, new PostContructHandler());
         grafacesMethodHandlers.put(WidgetValidation.class, new WidgetValidationHandler());
+        widgetValidtionHandler = new WidgetValidHandler();
     }
 
     public static GrafacesContext getInstance() {
@@ -84,14 +83,14 @@ public class GrafacesContext {
         return result;
     }
 
-    public void executeMethodsOfType(Class<? extends Annotation> annotationType, Object widget) {
+    public Object executeMethodsOfType(Class<? extends Annotation> annotationType, Object widget) {
         GrafacesObject grafacesObject = getGrafacesObject(widget.getClass());
         List<Method> methods = grafacesObject.getMethodfor(annotationType);
         GrafacesMethodHandler methodHandler = grafacesMethodHandlers.get(annotationType);
         if (methodHandler == null) {
             throw new IllegalArgumentException("No known method handler for type " + annotationType);
         }
-        methodHandler.executeMethods(methods, widget);
+        return methodHandler.executeMethods(methods, widget);
     }
 
     public boolean hasPropertyFor(Class<? extends Annotation> annotationType, Object widget) {
@@ -150,4 +149,9 @@ public class GrafacesContext {
         return Class.forName(listField.getGenericType().toString().split("<")[1].split(">")[0].split("<")[0]);
     }
 
+    public Object executeIsWidgetValid(Object widget) {
+        GrafacesObject grafacesObject = getGrafacesObject(widget.getClass());
+        List<Method> methods = grafacesObject.getMethodfor(WidgetValidation.class);
+        return widgetValidtionHandler.executeMethods(methods, widget);
+    }
 }

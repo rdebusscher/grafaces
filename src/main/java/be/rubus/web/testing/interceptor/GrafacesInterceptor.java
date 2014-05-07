@@ -42,6 +42,9 @@ public class GrafacesInterceptor implements Interceptor {
     public Object intercept(InvocationContext context) throws Throwable {
 
         Object widget = context.getTarget();
+        if ("isWidgetValid".equals(context.getMethod().getName())) {
+            return widgetValidResult(widget);
+        }
 
         WebElement root = grafacesContext.getInstanceOf(Root.class, widget, WebElement.class);
 
@@ -55,9 +58,11 @@ public class GrafacesInterceptor implements Interceptor {
         return context.invoke();
     }
 
+    private Object widgetValidResult(Object widget) {
+        return grafacesContext.executeIsWidgetValid(widget);
+    }
+
     private void handleWidget(Object widget) {
-
-
         grafacesContext.executeMethodsOfType(PostConstruct.class, widget);
         grafacesContext.executeMethodsOfType(WidgetValidation.class, widget);
 

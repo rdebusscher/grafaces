@@ -18,22 +18,29 @@
  */
 package be.rubus.web.testing.model;
 
-import be.rubus.web.testing.ReflectionUtil;
-
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  *
  */
-public class PostContructHandler implements GrafacesMethodHandler {
+public class WidgetValidHandler extends WidgetValidationHandler {
 
     @Override
     public Object executeMethods(List<Method> methods, Object target) {
-        for (Method method : methods) {
-            // Just simple execution needed
-            ReflectionUtil.invokeMethod(method, target);
+        Boolean result = Boolean.TRUE;
+
+        Iterator<Method> iterator = methods.iterator();
+        while (result && iterator.hasNext()) {
+            Method method = iterator.next();
+
+            if (!performValidation(method, target)) {
+                result = Boolean.FALSE;
+            }
         }
-        return null;
+        return result;
     }
+
+
 }
