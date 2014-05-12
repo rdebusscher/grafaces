@@ -23,6 +23,7 @@ import be.rubus.web.testing.annotation.WidgetValidation;
 import org.jboss.arquillian.graphene.fragment.Root;
 import org.jboss.arquillian.graphene.proxy.Interceptor;
 import org.jboss.arquillian.graphene.proxy.InvocationContext;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.PostConstruct;
@@ -49,9 +50,13 @@ public class GrafacesInterceptor implements Interceptor {
         WebElement root = grafacesContext.getInstanceOf(Root.class, widget, WebElement.class);
 
         if (root != null) {
-            if (!componentIds.contains(root.toString())) {
-                componentIds.add(root.toString());
-                handleWidget(context.getTarget());
+            try {
+                if (!componentIds.contains(root.toString())) {
+                    componentIds.add(root.toString());
+                    handleWidget(context.getTarget());
+                }
+            } catch (NoSuchElementException e) {
+                // It is possible that root doesn't exist and thus we must protect the toString() method.
             }
         }
 
