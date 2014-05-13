@@ -37,7 +37,7 @@ public class AbstractAngularPrimeWidget extends AbstractWidget {
 
     protected String getIconName(WebElement element) {
         String result = null;
-        String[] cssClasses = element.getAttribute("class").split(" ");
+        String[] cssClasses = getStyleClasses(element).split(" ");
         for (String cssClass : cssClasses) {
             if (cssClass.startsWith("ui-icon-")) {
                 result = cssClass.substring(8);

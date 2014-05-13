@@ -31,8 +31,12 @@ import static org.junit.Assert.assertFalse;
  */
 public class CommonElementCode {
 
+    protected String getStyleClasses(WebElement element) {
+        return element.getAttribute("class");
+    }
+
     protected boolean containsClassName(WebElement element, String className) {
-        return element.getAttribute("class").contains(className);
+        return getStyleClasses(element).contains(className);
     }
 
     protected boolean isHtmlElement(WebElement element, String elementName) {
