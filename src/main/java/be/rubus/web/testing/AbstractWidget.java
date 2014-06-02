@@ -81,6 +81,9 @@ public abstract class AbstractWidget extends CommonElementCode {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(driver.findElement(byId)));
     }
 
+    protected void presenceOfElementLocated(By byId) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(byId));
+    }
 
     protected void waitUntilHiddenOf(WebElement checkElement) {
         new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.visibilityOf(checkElement)));
