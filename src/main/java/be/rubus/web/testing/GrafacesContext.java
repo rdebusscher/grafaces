@@ -18,6 +18,7 @@
  */
 package be.rubus.web.testing;
 
+import be.rubus.web.testing.annotation.Grafaces;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.model.*;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -143,6 +144,12 @@ public class GrafacesContext {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        if (hasPropertyFor(Grafaces.class, childObject)) {
+            setInstanceOf(Grafaces.class, childObject, this);
+        }
+
+        executeMethodsOfType(PostConstruct.class, childObject);
     }
 
     private static Class<?> getListType(Field listField) throws ClassNotFoundException {
