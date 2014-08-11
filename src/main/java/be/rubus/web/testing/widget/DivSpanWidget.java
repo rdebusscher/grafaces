@@ -19,12 +19,13 @@
 package be.rubus.web.testing.widget;
 
 import be.rubus.web.testing.AbstractWidget;
-import be.rubus.web.testing.annotation.WidgetValidation;
 
 /**
  *
  */
 public class DivSpanWidget extends AbstractWidget {
 
-
+    public void click() {
+        root.click();
+    }
 }

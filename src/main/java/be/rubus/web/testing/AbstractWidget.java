@@ -33,6 +33,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public abstract class AbstractWidget extends CommonElementCode {
 
+    protected static final String UI_HOVER = "ui-state-hover";
+    protected static final String UI_DISABLED = "ui-state-disabled";
+    protected static final String UI_ACTIVE = "ui-state-active";
+    protected static final String UI_HIGHLIGHT = "ui-state-highlight";
 
     protected static final String VALUE = "value";
 
@@ -91,5 +95,21 @@ public abstract class AbstractWidget extends CommonElementCode {
 
     public String getAttribute(String attributeName) {
         return root.getAttribute(attributeName);
+    }
+
+    protected void click(WebElement element, Keys... keys) {
+        Actions builder = new Actions(driver);
+
+        for (Keys key : keys) {
+            builder.keyDown(key);
+        }
+        builder.click(element);
+        for (Keys key : keys) {
+            builder.keyUp(key);
+        }
+
+        Action action = builder.build();
+
+        action.perform();
     }
 }

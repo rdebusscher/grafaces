@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
 public class PuiInputDetector extends InputDetector {
     @Override
     public boolean isSupported(WebElement element) {
-        boolean result = super.isSupported(element);
+        boolean result = super.isSupported(element) && containsClassName(element, "ui-widget");
         if (result) {
             // TODO better detection.  Submit buttons are excluded already.
             result = !getAttribute(element, "type").toLowerCase().equals("submit");

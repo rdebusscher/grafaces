@@ -68,6 +68,26 @@ public class CommonElementCode {
 
     }
 
+    protected WebElement getPreviousSibling(WebElement element) {
+        String id = getId(element);
+        assertFalse("getPreviousSibling() can only be called for Element with id", id.isEmpty());
+
+        WebElement result = null;
+        WebElement parent = getParent(element);
+        List<WebElement> children = getAllChildren(parent);
+        Iterator<WebElement> iterator = children.iterator();
+        WebElement previous = null;
+        while (result == null && iterator.hasNext()) {
+            WebElement child = iterator.next();
+            if (getId(child).equals(id)) {
+                result = previous;
+            }
+            previous = child;
+        }
+        return result;
+
+    }
+
     protected List<WebElement> getAllChildren(WebElement element) {
         return element.findElements(By.xpath("*"));
     }
