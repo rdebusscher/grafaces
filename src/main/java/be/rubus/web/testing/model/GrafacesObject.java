@@ -18,6 +18,8 @@
  */
 package be.rubus.web.testing.model;
 
+import be.rubus.web.testing.GrafacesContext;
+import be.rubus.web.testing.annotation.Grafaces;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.detector.Detector;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -57,7 +59,7 @@ public class GrafacesObject {
     private void findGrafacesFields() {
         findGrafacesField(Root.class, WebElement.class);
         findGrafacesField(Drone.class, WebDriver.class);
-
+        findGrafacesField(Grafaces.class, GrafacesContext.class);
     }
 
     private void findGrafacesField(Class<? extends Annotation> annotationClass, Class<?> fieldType) {
