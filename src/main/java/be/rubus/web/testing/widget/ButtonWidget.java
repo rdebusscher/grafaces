@@ -23,8 +23,6 @@ import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.detector.Detector;
 import be.rubus.web.testing.detector.html5.ButtonDetector;
 
-import javax.annotation.PostConstruct;
-
 /**
  *
  */

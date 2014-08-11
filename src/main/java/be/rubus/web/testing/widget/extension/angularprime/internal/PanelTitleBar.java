@@ -74,7 +74,7 @@ public class PanelTitleBar extends AbstractAngularPrimeWidget {
         return title.getText();
     }
 
-    public boolean isCollapseable(){
+    public boolean isCollapseable() {
         return collapseExpandButton != null;
     }
 
@@ -82,11 +82,11 @@ public class PanelTitleBar extends AbstractAngularPrimeWidget {
         return closeButton != null;
     }
 
-    public boolean  isButtonStateExpanded() {
+    public boolean isButtonStateExpanded() {
         return collapseExpandButton.isDisplayed() && "minusthick".equals(defineIcon(collapseExpandButton));
     }
 
-    public boolean  isButtonStateCollapsed() {
+    public boolean isButtonStateCollapsed() {
         return collapseExpandButton.isDisplayed() && "plusthick".equals(defineIcon(collapseExpandButton));
     }
 

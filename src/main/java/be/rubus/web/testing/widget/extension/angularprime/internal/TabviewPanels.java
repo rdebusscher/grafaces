@@ -39,7 +39,7 @@ public class TabviewPanels extends AbstractAngularPrimeWidget {
     }
 
     public String getHtmlContent(int idx) {
-        return (String)((JavascriptExecutor)driver)
+        return (String) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].innerHTML;", panels.get(idx));
     }
 

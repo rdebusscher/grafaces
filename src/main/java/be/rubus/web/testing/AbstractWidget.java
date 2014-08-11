@@ -21,10 +21,8 @@ package be.rubus.web.testing;
 import be.rubus.web.testing.annotation.Grafaces;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.fragment.Root;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -50,6 +48,7 @@ public abstract class AbstractWidget extends CommonElementCode {
     /**
      * You can  call this method to verify if the DOM structure complies with the widget as defined by the method(s)
      * annotated by {@link be.rubus.web.testing.annotation.WidgetValidation}. Don't override this method.
+     *
      * @return true when DOM element complies.
      */
     // Can't be final due to proxy usage.

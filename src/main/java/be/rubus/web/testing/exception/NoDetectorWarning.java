@@ -21,7 +21,7 @@ package be.rubus.web.testing.exception;
 import be.rubus.web.testing.AbstractWidget;
 
 /**
- *  FIXME. We need to use this again.
+ * FIXME. We need to use this again.
  */
 public class NoDetectorWarning extends IllegalArgumentException {
 

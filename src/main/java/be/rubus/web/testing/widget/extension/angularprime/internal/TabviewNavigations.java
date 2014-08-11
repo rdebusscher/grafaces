@@ -55,7 +55,7 @@ public class TabviewNavigations extends AbstractAngularPrimeWidget {
     }
 
     public void closeTab(int idx) {
-         tabHeaders.get(idx).clickOnCloseIcon();
+        tabHeaders.get(idx).clickOnCloseIcon();
     }
 
     public boolean isLeftOrientation() {

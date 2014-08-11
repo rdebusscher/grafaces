@@ -46,7 +46,7 @@ public class PuiPanel extends AbstractAngularPrimeWidget {
         return titleBar.isTitleDisplayed();
     }
 
-    public boolean isCollapsable(){
+    public boolean isCollapsable() {
         return titleBar.isCollapseable();
     }
 
