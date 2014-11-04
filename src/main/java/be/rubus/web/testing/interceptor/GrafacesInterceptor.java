@@ -19,6 +19,7 @@
 package be.rubus.web.testing.interceptor;
 
 import be.rubus.web.testing.GrafacesContext;
+import be.rubus.web.testing.InitializingWidget;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import org.jboss.arquillian.graphene.fragment.Root;
 import org.jboss.arquillian.graphene.proxy.Interceptor;
@@ -47,16 +48,24 @@ public class GrafacesInterceptor implements Interceptor {
             return widgetValidResult(widget);
         }
 
-        WebElement root = grafacesContext.getInstanceOf(Root.class, widget, WebElement.class);
+        if (widget instanceof InitializingWidget) {
+            String widgetId = widget.toString();
+            if (!componentIds.contains(widgetId)) {
+                componentIds.add(widgetId);
+                handleWidget(context.getTarget());
+            }
+        } else {
+            WebElement root = grafacesContext.getInstanceOf(Root.class, widget, WebElement.class);
 
-        if (root != null) {
-            try {
-                if (!componentIds.contains(root.toString())) {
-                    componentIds.add(root.toString());
-                    handleWidget(context.getTarget());
+            if (root != null) {
+                try {
+                    if (!componentIds.contains(root.toString())) {
+                        componentIds.add(root.toString());
+                        handleWidget(context.getTarget());
+                    }
+                } catch (NoSuchElementException e) {
+                    // It is possible that root doesn't exist and thus we must protect the toString() method.
                 }
-            } catch (NoSuchElementException e) {
-                // It is possible that root doesn't exist and thus we must protect the toString() method.
             }
         }
 

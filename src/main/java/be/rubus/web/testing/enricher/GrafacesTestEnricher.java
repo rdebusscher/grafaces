@@ -21,9 +21,13 @@ package be.rubus.web.testing.enricher;
 import be.rubus.web.testing.GrafacesContext;
 import be.rubus.web.testing.ReflectionUtil;
 import be.rubus.web.testing.annotation.Grafaces;
+import org.jboss.arquillian.graphene.context.GrapheneContext;
 import org.jboss.arquillian.graphene.enricher.AbstractSearchContextEnricher;
 import org.jboss.arquillian.graphene.enricher.ReflectionHelper;
+import org.jboss.arquillian.graphene.proxy.GrapheneProxy;
+import org.jboss.arquillian.graphene.proxy.GrapheneProxyInstance;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -44,9 +48,9 @@ public class GrafacesTestEnricher extends AbstractSearchContextEnricher {
                 ReflectionUtil.setValue(field, target, grafacesContext);
             } else {
                 try {
-                    Object fieldValue = field.getType().newInstance();
-                    ReflectionUtil.setValue(field, target, fieldValue);
-                    enrichRecursively(searchContext, fieldValue);
+                    Object futureTarget = createProxyAndEnrich(searchContext, field);
+                    ReflectionUtil.setValue(field, target, futureTarget);
+
                 } catch (InstantiationException e) {
                     // FIXME logging
                     e.printStackTrace();
@@ -57,6 +61,32 @@ public class GrafacesTestEnricher extends AbstractSearchContextEnricher {
                 }
             }
         }
+    }
+
+    private Object createProxyAndEnrich(SearchContext searchContext, Field field) throws InstantiationException, IllegalAccessException {
+        final Object fieldValue = field.getType().newInstance();
+
+        GrapheneContext grapheneContext = GrapheneContext.getContextFor(ReflectionHelper.getQualifier(field.getAnnotations()));
+        SearchContext localSearchContext = grapheneContext.getWebDriver(SearchContext.class);
+
+        GrapheneProxy.FutureTarget targetToFieldValue = new GrapheneProxy.FutureTarget() {
+            @Override
+            public Object getTarget() {
+                return fieldValue;
+            }
+        };
+        Object futureTarget = GrapheneProxy.getProxyForFutureTarget(getContext(localSearchContext), targetToFieldValue, fieldValue.getClass());
+        // This is not very clear to me but it works
+        enrichRecursively(searchContext, futureTarget);
+        enrichRecursively(searchContext, fieldValue);
+        return futureTarget;
+    }
+
+    protected static GrapheneContext getContext(Object object) {
+        if (!GrapheneProxy.isProxyInstance(object)) {
+            throw new IllegalArgumentException("The parameter [object] has to be instance of " + GrapheneProxyInstance.class.getName() + ", but it is not. The given object is " + object + ".");
+        }
+        return ((GrapheneProxyInstance) object).getContext();
     }
 
     @Override
