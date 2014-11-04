@@ -26,6 +26,7 @@ import org.jboss.arquillian.graphene.enricher.ReflectionHelper;
 import org.jboss.arquillian.graphene.findby.FindByUtilities;
 import org.jboss.arquillian.graphene.fragment.Root;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -160,5 +161,15 @@ public class GrafacesContext {
         GrafacesObject grafacesObject = getGrafacesObject(widget.getClass());
         List<Method> methods = grafacesObject.getMethodfor(WidgetValidation.class);
         return widgetValidtionHandler.executeMethods(methods, widget);
+    }
+
+    public boolean isWidgetFound(WebElement element) {
+        boolean result = true;
+        try {
+            element.toString();
+        } catch (NoSuchElementException e) {
+            result = false;
+        }
+        return result;
     }
 }
