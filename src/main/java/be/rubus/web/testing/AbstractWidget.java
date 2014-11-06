@@ -93,10 +93,6 @@ public abstract class AbstractWidget extends CommonElementCode {
 
     }
 
-    public String getAttribute(String attributeName) {
-        return root.getAttribute(attributeName);
-    }
-
     protected void click(WebElement element, Keys... keys) {
         Actions builder = new Actions(driver);
 

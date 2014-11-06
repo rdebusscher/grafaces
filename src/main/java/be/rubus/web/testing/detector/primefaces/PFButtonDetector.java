@@ -18,16 +18,16 @@
  */
 package be.rubus.web.testing.detector.primefaces;
 
-import be.rubus.web.testing.detector.html5.InputDetector;
+import be.rubus.web.testing.detector.GenericDetector;
 import org.openqa.selenium.WebElement;
 
 /**
  *
  */
-public class PFButtonDetector extends InputDetector {
+public class PFButtonDetector extends GenericDetector {
 
     @Override
     public boolean isSupported(WebElement element) {
-        return super.isSupported(element) && containsClassName(element, "ui-widget");
+        return isHtmlElement(element, "BUTTON") && containsClassName(element, "ui-widget");
     }
 }
