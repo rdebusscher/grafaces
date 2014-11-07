@@ -73,7 +73,7 @@ public class GrafacesContext {
     public <T> T getInstanceOf(Class<? extends Annotation> annotationType, Object widget, Class<T> classType) {
         GrafacesObject grafacesObject = getGrafacesObject(widget.getClass());
         Field field = grafacesObject.getFieldFor(annotationType);
-        return ReflectionUtil.getFieldValue(field, widget, classType);
+        return field == null ? null : ReflectionUtil.getFieldValue(field, widget, classType);
     }
 
     private GrafacesObject getGrafacesObject(Class<? extends Object> widgetClass) {
