@@ -22,13 +22,13 @@ import be.rubus.web.testing.annotation.Grafaces;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.model.*;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.context.GrapheneContext;
 import org.jboss.arquillian.graphene.enricher.ReflectionHelper;
 import org.jboss.arquillian.graphene.findby.FindByUtilities;
 import org.jboss.arquillian.graphene.fragment.Root;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.jboss.arquillian.graphene.proxy.GrapheneProxy;
+import org.jboss.arquillian.graphene.proxy.GrapheneProxyInstance;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -171,5 +171,23 @@ public class GrafacesContext {
             result = false;
         }
         return result;
+    }
+
+    public Object asProxy(final Object widget, SearchContext searchContext) {
+        GrapheneProxy.FutureTarget targetToFieldValue = new GrapheneProxy.FutureTarget() {
+            @Override
+            public Object getTarget() {
+                return widget;
+            }
+        };
+        return GrapheneProxy.getProxyForFutureTarget(getContext(searchContext), targetToFieldValue, widget.getClass());
+
+    }
+
+    protected static GrapheneContext getContext(Object object) {
+        if (!GrapheneProxy.isProxyInstance(object)) {
+            throw new IllegalArgumentException("The parameter [object] has to be instance of " + GrapheneProxyInstance.class.getName() + ", but it is not. The given object is " + object + ".");
+        }
+        return ((GrapheneProxyInstance) object).getContext();
     }
 }
