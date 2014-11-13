@@ -16,20 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package be.rubus.web.testing.widget;
+package be.rubus.web.testing.detector.primefaces;
 
-import be.rubus.web.testing.AbstractWidget;
+import be.rubus.web.testing.detector.html5.InputDetector;
+import org.openqa.selenium.WebElement;
 
 /**
  *
  */
-public class DivSpanWidget extends AbstractWidget {
+public class PFPasswordDetector extends InputDetector {
 
-    public void click() {
-        root.click();
-    }
-
-    public boolean isVisible() {
-        return root.isDisplayed();
+    @Override
+    public boolean isSupported(WebElement element) {
+        return super.isSupported(element) && "password".equals(getAttribute(element, "type")) && containsClassName(element, "ui-widget") && containsClassName(element,
+                "ui-password");
     }
 }

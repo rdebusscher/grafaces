@@ -22,12 +22,14 @@ import be.rubus.web.testing.GrafacesContext;
 import be.rubus.web.testing.InitializingWidget;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import org.jboss.arquillian.graphene.fragment.Root;
+import org.jboss.arquillian.graphene.proxy.GrapheneProxyInstance;
 import org.jboss.arquillian.graphene.proxy.Interceptor;
 import org.jboss.arquillian.graphene.proxy.InvocationContext;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.PostConstruct;
+import java.lang.reflect.Proxy;
 import java.util.HashSet;
 import java.util.Set;
 

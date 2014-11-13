@@ -32,7 +32,7 @@ public class PFSelectOneRadio extends AbstractPrimeFacesWidget {
     }
 
     @WidgetValidation
-    public boolean isWidgetValid() {
+    public boolean isValidWidget() {
         return isHtmlElement(root, "TABLE") && containsClassName(root, "ui-selectoneradio");
     }
 

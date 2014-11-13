@@ -173,7 +173,7 @@ public class GrafacesContext {
         return result;
     }
 
-    public Object asProxy(final Object widget, SearchContext searchContext) {
+    public <T> T asProxy(final Object widget, SearchContext searchContext) {
         GrapheneProxy.FutureTarget targetToFieldValue = new GrapheneProxy.FutureTarget() {
             @Override
             public Object getTarget() {

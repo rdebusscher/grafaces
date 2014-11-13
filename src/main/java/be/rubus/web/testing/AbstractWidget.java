@@ -65,6 +65,17 @@ public abstract class AbstractWidget extends CommonElementCode {
         return root.getText();
     }
 
+    public String getContentInAnyCase(WebElement element) {
+        String result = element.getText();
+        if (result == null || result.length() == 0) {
+            result = element.getAttribute("textContent");
+            if (result == null || result.length() == 0) {
+                result = element.getAttribute("innerText");
+            }
+        }
+        return result;
+    }
+
     protected void moveTo(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
