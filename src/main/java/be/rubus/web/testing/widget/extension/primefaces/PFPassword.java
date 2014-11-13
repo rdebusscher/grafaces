@@ -1,6 +1,7 @@
 package be.rubus.web.testing.widget.extension.primefaces;
 
 import be.rubus.web.testing.detector.Detector;
+import be.rubus.web.testing.detector.primefaces.PFPasswordDetector;
 import be.rubus.web.testing.widget.extension.primefaces.internal.PasswordFeedbackPanel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -31,7 +32,7 @@ public class PFPassword extends PFInputText {
 
     @Override
     public Detector getDetector() {
-        return super.getDetector();
+        return new PFPasswordDetector();
     }
 
     public boolean hasFeedback() {
