@@ -48,6 +48,10 @@ public class CommonElementCode {
         return element.findElement(By.xpath(".."));
     }
 
+    @Deprecated
+    /**
+     * @deprecated  Please use the by.xpath("/followingSibling::xx")
+     */
     protected WebElement getNextSibling(WebElement element) {
         String id = getId(element);
         assertFalse("getNextSibling() can only be called for Element with id", id.isEmpty());
@@ -63,26 +67,6 @@ public class CommonElementCode {
                     result = iterator.next();
                 }
             }
-        }
-        return result;
-
-    }
-
-    protected WebElement getPreviousSibling(WebElement element) {
-        String id = getId(element);
-        assertFalse("getPreviousSibling() can only be called for Element with id", id.isEmpty());
-
-        WebElement result = null;
-        WebElement parent = getParent(element);
-        List<WebElement> children = getAllChildren(parent);
-        Iterator<WebElement> iterator = children.iterator();
-        WebElement previous = null;
-        while (result == null && iterator.hasNext()) {
-            WebElement child = iterator.next();
-            if (getId(child).equals(id)) {
-                result = previous;
-            }
-            previous = child;
         }
         return result;
 

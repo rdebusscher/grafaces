@@ -42,7 +42,7 @@ public class AccordionPanel extends AbstractAngularPrimeWidget {
 
     public void click() {
         boolean nowActive = isActive();
-        root.click();
+        super.click();
         if (!nowActive) {
             waitUntilVisibilityOf(content);
         } else {

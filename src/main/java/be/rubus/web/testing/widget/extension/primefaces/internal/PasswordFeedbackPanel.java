@@ -30,9 +30,4 @@ public class PasswordFeedbackPanel extends AbstractPrimeFacesWidget {
         // TODO check if we have the correct number of items in the array
         return PFPassword.FeedbackColor.getInstance(values[1]);
     }
-
-    // TODO make this a more generic method, a couple of times used already.
-    public boolean isVisible() {
-        return root.isDisplayed();
-    }
 }

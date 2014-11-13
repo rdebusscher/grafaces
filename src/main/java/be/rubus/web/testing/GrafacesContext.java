@@ -76,7 +76,7 @@ public class GrafacesContext {
         return field == null ? null : ReflectionUtil.getFieldValue(field, widget, classType);
     }
 
-    private GrafacesObject getGrafacesObject(Class<? extends Object> widgetClass) {
+    private GrafacesObject getGrafacesObject(Class<?> widgetClass) {
         GrafacesObject result = grafacesObjects.get(widgetClass);
         if (result == null) {
             result = new GrafacesObject(widgetClass);

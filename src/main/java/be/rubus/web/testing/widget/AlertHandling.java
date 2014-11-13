@@ -33,7 +33,7 @@ import static org.junit.Assert.fail;
 public class AlertHandling {
 
     @Drone
-    protected WebDriver driver;
+    private WebDriver driver;
 
     private Alert alert;
 

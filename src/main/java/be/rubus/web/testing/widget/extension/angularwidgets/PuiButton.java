@@ -43,9 +43,6 @@ public class PuiButton extends AbstractAngularWidgetsWidget {
         return iconSpan.isPresent() ? getIconName(iconSpan) : null;
     }
 
-    public void click() {
-        root.click();
-    }
 
     public boolean isDisabled() {
         return containsClassName(root, "ui-state-disabled");
@@ -62,9 +59,5 @@ public class PuiButton extends AbstractAngularWidgetsWidget {
             }
         }
         return result;
-    }
-
-    public boolean isVisible() {
-        return root.isDisplayed();
     }
 }

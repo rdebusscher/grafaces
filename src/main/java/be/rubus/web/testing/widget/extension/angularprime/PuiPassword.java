@@ -66,14 +66,6 @@ public class PuiPassword extends AbstractAngularPrimeWidget {
         return containsClassName(root, PUI_DISABLED);
     }
 
-    public void click() {
-        root.click();
-    }
-
-    public boolean isVisible() {
-        return root.isDisplayed();
-    }
-
     public String getValue() {
         return root.getAttribute("value");
     }

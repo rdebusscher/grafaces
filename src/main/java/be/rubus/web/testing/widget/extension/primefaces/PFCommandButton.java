@@ -52,18 +52,6 @@ public class PFCommandButton extends AbstractPrimeFacesWidget {
         return containsClassName(root, UI_DISABLED);
     }
 
-    public void click() {
-        root.click();
-    }
-
-    public boolean isVisible() {
-        boolean result = grafacesContext.isWidgetFound(root);
-        if (result) {
-            result = root.isDisplayed();
-        }
-        return result;
-    }
-
     public String getLabel() {
         String result = null;
         if (!containsClassName(root, "pui-button-icon-only")) {

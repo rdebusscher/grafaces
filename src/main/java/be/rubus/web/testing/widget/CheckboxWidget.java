@@ -22,7 +22,6 @@ import be.rubus.web.testing.AbstractWidget;
 import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.detector.Detector;
 import be.rubus.web.testing.detector.html5.CheckboxDetector;
-import be.rubus.web.testing.detector.html5.InputDetector;
 
 /**
  *
@@ -32,10 +31,6 @@ public class CheckboxWidget extends AbstractWidget {
     @WidgetValidation
     public Detector getDetector() {
         return new CheckboxDetector();
-    }
-
-    public void click() {
-        root.click();
     }
 
     public boolean isChecked() {

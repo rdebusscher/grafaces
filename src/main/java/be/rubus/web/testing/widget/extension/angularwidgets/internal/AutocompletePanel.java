@@ -10,9 +10,6 @@ import java.util.List;
  *
  */
 public class AutocompletePanel extends AbstractAngularWidgetsWidget {
-    public boolean isVisible() {
-        return root.isDisplayed();
-    }
 
     private List<WebElement> getPanelItems() {
         return root.findElements(By.className("pui-autocomplete-item"));

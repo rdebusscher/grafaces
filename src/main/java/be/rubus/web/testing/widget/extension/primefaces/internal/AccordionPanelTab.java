@@ -1,5 +1,6 @@
 package be.rubus.web.testing.widget.extension.primefaces.internal;
 
+import be.rubus.web.testing.annotation.WidgetValidation;
 import be.rubus.web.testing.widget.DivSpanWidget;
 import be.rubus.web.testing.widget.extension.primefaces.AbstractPrimeFacesWidget;
 import org.openqa.selenium.By;
@@ -26,6 +27,10 @@ public class AccordionPanelTab extends AbstractPrimeFacesWidget {
     }
 
 
+    @WidgetValidation
+    public boolean isValidWidget() {
+        return panel != null;
+    }
 
     public String getTitle() {
         return root.getText();

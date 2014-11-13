@@ -34,8 +34,4 @@ public class ButtonWidget extends AbstractWidget {
         return new ButtonDetector();
     }
 
-    public void click() {
-        root.click();
-    }
-
 }

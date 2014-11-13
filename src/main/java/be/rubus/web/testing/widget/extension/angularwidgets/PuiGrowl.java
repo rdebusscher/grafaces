@@ -55,7 +55,7 @@ public class PuiGrowl {
     }
 
     public static enum Severity {
-        INFO, WARN, ERROR, FATAL;
+        INFO, WARN, ERROR, FATAL
 
     }
 }

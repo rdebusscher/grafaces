@@ -19,10 +19,6 @@ public class RadioButtonWidget extends AbstractWidget {
         return root.getAttribute("value");
     }
 
-    public void click() {
-        root.click();
-    }
-
     public boolean isSelected() {
         return "true".equalsIgnoreCase(root.getAttribute("checked"));
     }

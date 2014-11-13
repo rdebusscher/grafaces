@@ -59,7 +59,4 @@ public class PuiButton extends AbstractAngularPrimeWidget {
         return iconSpan.isPresent() ? getIconName(iconSpan) : null;
     }
 
-    public void click() {
-        root.click();
-    }
 }

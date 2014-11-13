@@ -42,11 +42,4 @@ public class PFSelectBooleanCheckbox extends AbstractPrimeFacesWidget {
         return containsClassName(checkboxBox, UI_DISABLED);
     }
 
-    public boolean isVisible() {
-        boolean result = grafacesContext.isWidgetFound(root);
-        if (result) {
-            result = root.isDisplayed();
-        }
-        return result;
-    }
 }

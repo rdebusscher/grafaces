@@ -25,11 +25,4 @@ import be.rubus.web.testing.AbstractWidget;
  */
 public class DivSpanWidget extends AbstractWidget {
 
-    public void click() {
-        root.click();
-    }
-
-    public boolean isVisible() {
-        return root.isDisplayed();
-    }
 }

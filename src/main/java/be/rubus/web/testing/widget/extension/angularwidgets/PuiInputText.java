@@ -66,14 +66,6 @@ public class PuiInputText extends AbstractAngularWidgetsWidget {
         root.sendKeys(Keys.ARROW_DOWN);
     }
 
-    public void click() {
-        root.click();
-    }
-
-    public boolean isVisible() {
-        return root.isDisplayed();
-    }
-
     public String getValue() {
         return root.getAttribute(VALUE);
     }

@@ -76,6 +76,18 @@ public abstract class AbstractWidget extends CommonElementCode {
         return result;
     }
 
+    public boolean isVisible() {
+        boolean result = grafacesContext.isWidgetFound(root);
+        if (result) {
+            result = root.isDisplayed();
+        }
+        return result;
+    }
+
+    public void click() {
+        root.click();
+    }
+
     protected void moveTo(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
