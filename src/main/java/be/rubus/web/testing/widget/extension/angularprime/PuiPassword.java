@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  *
@@ -23,9 +24,11 @@ public class PuiPassword extends AbstractAngularPrimeWidget {
     @PostConstruct
     private void getReferenceToPanel() {
         if (passwordPanel == null) {
-            WebElement candidate = getNextSibling(root);
-            if (containsClassName(candidate, "pui-password-panel")) {
-                passwordPanel = candidate;
+            List<WebElement> elements = root.findElements(By.xpath("following-sibling::div"));
+            for (WebElement element : elements) {
+                if (containsClassName(element, "pui-password-panel")) {
+                    passwordPanel = element;
+                }
             }
         }
     }

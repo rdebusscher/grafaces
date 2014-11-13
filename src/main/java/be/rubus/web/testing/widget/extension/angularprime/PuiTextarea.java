@@ -46,9 +46,11 @@ public class PuiTextarea extends AbstractAngularPrimeWidget {
     }
 
     public boolean hasAutoComplete() {
-        popupPanel = getNextSibling(root);
-        if (popupPanel != null && !containsClassName(popupPanel, "pui-autocomplete-panel")) {
-            popupPanel = null;
+        List<WebElement> elements = root.findElements(By.xpath("following-sibling::div"));
+        for (WebElement element : elements) {
+            if (containsClassName(element, "pui-autocomplete-panel")) {
+                popupPanel = element;
+            }
         }
         return popupPanel != null;
     }

@@ -12,6 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  *
@@ -31,10 +32,12 @@ public class PuiAutocomplete extends AbstractAngularWidgetsWidget {
 
     @PostConstruct
     public void retrieveElements() {
-        WebElement element = getNextSibling(root);
-        if (element != null && containsClassName(element, "pui-button") && !element.findElements(By.className("pui-autocomplete-dropdown")).isEmpty()) {
-            dropdownButton = new PuiButton();
-            grafacesContext.initializePageFragment(dropdownButton, element, this);
+        List<WebElement> elements = root.findElements(By.xpath("following-sibling::button"));
+        for (WebElement element : elements) {
+            if (containsClassName(element, "pui-button") && !element.findElements(By.className("pui-autocomplete-dropdown")).isEmpty()) {
+                dropdownButton = new PuiButton();
+                grafacesContext.initializePageFragment(dropdownButton, element, this);
+            }
         }
         WebElement parent = getParent(root);
         if (containsClassName(parent, "pui-autocomplete-multiple")) {

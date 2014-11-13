@@ -35,10 +35,13 @@ public class PuiDatatable extends AbstractAngularWidgetsWidget {
         }
 
         identifyRows();
-        WebElement webElement = getNextSibling(root);
-        if (webElement != null && containsClassName(webElement, "pui-paginator")) {
-            paginator = new Paginator();
-            grafacesContext.initializePageFragment(paginator, webElement, this);
+        List<WebElement> elements = root.findElements(By.xpath("following-sibling::div"));
+        for (WebElement element : elements) {
+
+            if (containsClassName(element, "pui-paginator")) {
+                paginator = new Paginator();
+                grafacesContext.initializePageFragment(paginator, element, this);
+            }
         }
 
         List<WebElement> captionElements = root.findElements(By.tagName("caption"));
