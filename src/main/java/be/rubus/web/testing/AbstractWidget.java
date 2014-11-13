@@ -88,6 +88,22 @@ public abstract class AbstractWidget extends CommonElementCode {
         root.click();
     }
 
+    public String getStyleClasses() {
+        return root.getAttribute("class");
+    }
+
+    public boolean containsClassName(String className) {
+        return getStyleClasses(root).contains(className);
+    }
+
+    public String getComputedCssValue(String cssName) {
+        return root.getCssValue(cssName);
+    }
+
+    public String getAttribute(String attributeName) {
+        return root.getAttribute(attributeName);
+    }
+
     protected void moveTo(WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
