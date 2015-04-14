@@ -23,12 +23,33 @@ public class SubMenu extends AbstractPrimeFacesWidget {
     @PostConstruct
     public void init() {
 
+        if (containsClassName("ui-menuitem")) {
+            menuBarBased();
+        }
+
+        if (containsClassName("ui-panelmenu-panel")) {
+            panelMenuBased();
+        }
+    }
+
+    private void panelMenuBased() {
+        itemLabel = root.findElement(By.xpath("h3/a"));
+        hasText = true;
+        List<WebElement> ul = root.findElements(By.xpath("div/ul"));
+        initializeItems(ul);
+    }
+
+    private void menuBarBased() {
         itemLabel = root.findElement(By.xpath("a"));
         hasText = !itemLabel.findElements(By.className("ui-menuitem-text")).isEmpty();
 
         // Need to use List version, when not found it throws an exception
         List<WebElement> ul = root.findElements(By.xpath("ul"));
 
+        initializeItems(ul);
+    }
+
+    private void initializeItems(List<WebElement> ul) {
         if (!ul.isEmpty()) {
             WebElement subMenuList = ul.get(0);
 

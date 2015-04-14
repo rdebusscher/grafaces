@@ -6,18 +6,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  *
  */
-public class PFMenuBar extends PFAbstractMenu {
+public class PFPanelMenu extends PFAbstractMenu {
 
+    @WidgetValidation
+    public boolean isValidWidget() {
+        return isHtmlElement(root, "DIV") && containsClassName(root, "ui-panelmenu");
+    }
 
     @PostConstruct
     public void init() {
-        WebElement subMenuList = root.findElement(By.xpath("ul"));
-
-        for (WebElement item : subMenuList.findElements(By.xpath("li"))) {
+        List<WebElement> subMenuList = root.findElements(By.className("ui-panelmenu-panel"));
+        for (WebElement item : subMenuList) {
 
             SubMenu subMenu = new SubMenu();
             grafacesContext.initializePageFragment(subMenu, item, this);
@@ -27,9 +31,5 @@ public class PFMenuBar extends PFAbstractMenu {
         }
     }
 
-    @WidgetValidation
-    public boolean isValidWidget() {
-        return isHtmlElement(root, "DIV") && containsClassName(root, "ui-menubar");
-    }
 
 }
